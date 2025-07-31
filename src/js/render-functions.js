@@ -2,20 +2,12 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const galleryContainer = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('#load-more');
+const loader = document.querySelector('.loader');
+
 const lightbox = new SimpleLightbox('.gallery a');
 
-export function showLoader() {
-  document.querySelector('.loader').style.display = 'block';
-}
-
-export function hideLoader() {
-  document.querySelector('.loader').style.display = 'none';
-}
-
-
 export function createGallery(images) {
-  if (!galleryContainer) return;
-
   const markup = images.map(image => `
     <li class="gallery-item">
       <a href="${image.largeImageURL}">
@@ -35,6 +27,21 @@ export function createGallery(images) {
 }
 
 export function clearGallery() {
-  if (!galleryContainer) return;
   galleryContainer.innerHTML = '';
+}
+
+export function showLoader() {
+  loader.classList.add('visible');
+}
+
+export function hideLoader() {
+  loader.classList.remove('visible');
+}
+
+export function showLoadMoreButton() {
+  loadMoreBtn.classList.remove('hidden');
+}
+
+export function hideLoadMoreButton() {
+  loadMoreBtn.classList.add('hidden');
 }
