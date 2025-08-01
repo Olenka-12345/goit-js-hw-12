@@ -11,7 +11,7 @@ async function fetchImages(query, page = 1) {
   try {
     const response = await fetchFromPixabay(query, page); // твоя функція API
 
-    if (response.hits.length === 0) {
+    if (!response.hits || response.hits.length === 0) {
       gallery.innerHTML = '<p>No images found. Try another search.</p>';
       toggleLoading(null);
       return;
@@ -22,6 +22,7 @@ async function fetchImages(query, page = 1) {
     toggleLoading(null); // приховати все після завантаження
   } catch (error) {
     console.error('Error fetching images:', error);
+    gallery.innerHTML = '<p>Error loading images. Please try again.</p>';
     toggleLoading(null);
   }
 }
