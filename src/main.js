@@ -1,5 +1,4 @@
 import { getImagesByQuery } from './js/pixabay-api.js';
-
 import {
   createGallery,
   clearGallery,
@@ -32,7 +31,6 @@ form.addEventListener('submit', async e => {
 
   clearGallery();
   hideLoadMoreButton();
-  
 
   try {
     const data = await getImagesByQuery(query, page);
@@ -57,6 +55,7 @@ form.addEventListener('submit', async e => {
 
 loadMoreBtn.addEventListener('click', async () => {
   page++;
+  showLoader(); // ✅ Показуємо лоадер тільки тут
 
   try {
     const data = await getImagesByQuery(query, page);
