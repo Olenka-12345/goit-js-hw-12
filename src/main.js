@@ -1,3 +1,5 @@
+
+import { fetchFromPixabay } from './pixabay-api.js';
 let currentPage = 1;
 let currentQuery = '';
 
