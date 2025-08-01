@@ -44,9 +44,9 @@ form.addEventListener('submit', async e => {
     createGallery(data.hits);
     hideLoader();
 
-    if (totalHits > 15) {
-      loadMoreBtn.textContent = 'Load More';
-      showLoadMoreButton();
+    // ❌ Не показуємо кнопку на першій сторінці
+    if (totalHits > 15 && currentPage === 1) {
+      // нічого не показуємо
     }
   } catch (error) {
     iziToast.error({ message: 'Error loading images. Please try again.' });
@@ -57,6 +57,16 @@ form.addEventListener('submit', async e => {
 loadMoreBtn.addEventListener('click', async () => {
   currentPage += 1;
   hideLoadMoreButton();
+
+  // 🔔 Повідомлення при натисканні на кнопку
+  iziToast.info({
+    message: 'Loading images, please wait.',
+    position: 'bottomCenter',
+    timeout: 2000,
+    progressBar: false,
+    close: false
+  });
+
   showLoader();
 
   try {
@@ -98,7 +108,7 @@ window.addEventListener('scroll', async () => {
     isLoading = true;
 
     iziToast.info({
-      message: 'Loading images, please wait...',
+      message: 'Loading images, please wait.',
       position: 'bottomCenter',
       timeout: 2000,
       progressBar: false,
@@ -123,4 +133,3 @@ window.addEventListener('scroll', async () => {
     }
   }
 });
-
