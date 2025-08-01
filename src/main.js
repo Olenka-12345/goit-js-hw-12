@@ -1,5 +1,6 @@
 let currentPage = 1;
 let currentQuery = '';
+
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more-btn');
 const loader = document.querySelector('.loader');
@@ -9,8 +10,14 @@ async function fetchImages(query, page = 1) {
 
   try {
     const response = await fetchFromPixabay(query, page); // твоя функція API
-    renderImages(response.hits);
 
+    if (response.hits.length === 0) {
+      gallery.innerHTML = '<p>No images found. Try another search.</p>';
+      toggleLoading(null);
+      return;
+    }
+
+    renderImages(response.hits);
     currentPage = page;
     toggleLoading(null); // приховати все після завантаження
   } catch (error) {
@@ -49,7 +56,6 @@ function toggleLoading(page) {
     loader.style.display = 'none';
   }
 }
-
 
 document.querySelector('form').addEventListener('submit', e => {
   e.preventDefault();
