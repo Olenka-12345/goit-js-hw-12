@@ -30,7 +30,7 @@
     text-align: center;
 }
 
-.loader.hidden {
+.hidden {
   display: none;
 }
 .loader {
