@@ -32,11 +32,13 @@ export function clearGallery() {
 
 
 export function showLoader() {
-  loader.classList.remove('hidden');
+  const loader = document.querySelector('.loader');
+  if (loader) loader.classList.remove('hidden');
 }
 
 export function hideLoader() {
-  loader.classList.add('hidden');
+  const loader = document.querySelector('.loader');
+  if (loader) loader.classList.add('hidden');
 }
 
 
