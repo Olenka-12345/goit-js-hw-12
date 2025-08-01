@@ -31,7 +31,7 @@ form.addEventListener('submit', async e => {
 
   clearGallery();
   hideLoadMoreButton();
-  showLoader(); // ✅ Показуємо лоадер при першому запиті
+  showLoader();
 
   try {
     const data = await getImagesByQuery(query, page);
