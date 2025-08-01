@@ -29,7 +29,16 @@
     gap: 28px;
     text-align: center;
 }
-.load-more-button {
+
+.loader.hidden {
+  display: none;
+}
+.loader {
+    display: block;
+    width: 48px;
+    height: 48px;
+
+  .load-more-button {
         font-family: "Montserrat", sans-serif;
         font-weight: 500;
         font-size: 16px;
@@ -44,11 +53,4 @@
         display: block;
         margin: 0 auto;
 }
-.loader.hidden {
-  display: none;
-}
-.loader {
-    display: block;
-    width: 48px;
-    height: 48px;
    
