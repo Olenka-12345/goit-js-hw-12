@@ -11,10 +11,11 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import './css/style.css';
 
-
 let currentPage = 1;
 let currentQuery = '';
 let totalHits = 0;
+let isLoading = false;
+let enableScrollLoading = false;
 
 const form = document.querySelector('form');
 const loadMoreBtn = document.querySelector('.load-more-btn');
@@ -25,6 +26,7 @@ form.addEventListener('submit', async e => {
   if (!currentQuery) return;
 
   currentPage = 1;
+  enableScrollLoading = false;
   clearGallery();
   hideLoadMoreButton();
   showLoader();
@@ -42,7 +44,8 @@ form.addEventListener('submit', async e => {
     createGallery(data.hits);
     hideLoader();
 
-    if (currentPage * 15 < totalHits) {
+    if (totalHits > 15) {
+      loadMoreBtn.textContent = 'Load More';
       showLoadMoreButton();
     }
   } catch (error) {
@@ -61,10 +64,18 @@ loadMoreBtn.addEventListener('click', async () => {
     createGallery(data.hits);
     hideLoader();
 
-    if (currentPage * 15 >= totalHits) {
-      iziToast.info({ message: "We're sorry, but you've reached the end of search results." });
-    } else {
+    if (currentPage === 2 && totalHits > currentPage * 15) {
+      loadMoreBtn.textContent = 'Scroll to load more';
       showLoadMoreButton();
+    }
+
+    if (currentPage >= 3) {
+      enableScrollLoading = true;
+      hideLoadMoreButton();
+    }
+
+    if (currentPage * 15 >= totalHits) {
+      iziToast.info({ message: "You've reached the end of search results." });
     }
 
     const { height } = document.querySelector('.gallery').firstElementChild.getBoundingClientRect();
@@ -74,3 +85,42 @@ loadMoreBtn.addEventListener('click', async () => {
     hideLoader();
   }
 });
+
+window.addEventListener('scroll', async () => {
+  if (!enableScrollLoading || isLoading) return;
+
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
+    if (currentPage * 15 >= totalHits) return;
+
+    currentPage += 1;
+    isLoading = true;
+
+    iziToast.info({
+      message: 'Loading images, please wait...',
+      position: 'bottomCenter',
+      timeout: 2000,
+      progressBar: false,
+      close: false
+    });
+
+    showLoader();
+
+    try {
+      const data = await getImagesByQuery(currentQuery, currentPage);
+      createGallery(data.hits);
+      hideLoader();
+      isLoading = false;
+
+      if (currentPage * 15 >= totalHits) {
+        iziToast.info({ message: "You've reached the end of search results." });
+      }
+    } catch (error) {
+      iziToast.error({ message: 'Error loading more images.' });
+      hideLoader();
+      isLoading = false;
+    }
+  }
+});
+

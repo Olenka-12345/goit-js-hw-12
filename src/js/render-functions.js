@@ -29,17 +29,25 @@ export function clearGallery() {
 }
 
 export function showLoader() {
-  loader.classList.add('visible');
+  if (loader) {
+    loader.classList.add('visible');
+  }
 }
 
 export function hideLoader() {
-  loader.classList.remove('visible');
+  if (loader) {
+    loader.classList.remove('visible');
+  }
 }
 
 export function showLoadMoreButton() {
-  loadMoreBtn.classList.add('visible');
+  if (loadMoreBtn) {
+    loadMoreBtn.classList.add('visible');
+  }
 }
 
 export function hideLoadMoreButton() {
-  loadMoreBtn.classList.remove('visible');
+  if (loadMoreBtn) {
+    loadMoreBtn.classList.remove('visible');
+  }
 }
