@@ -46,7 +46,7 @@ form.addEventListener('submit', async e => {
     iziToast.success({ message: `Hooray! We found ${data.totalHits} images` });
 
     totalPages = Math.ceil(data.totalHits / 15);
-    if (page < totalPages) showLoadMoreButton();
+    if (page===1) showLoadMoreButton();
     else iziToast.info({ message: "We're sorry, but you've reached the end of search results." });
   } catch (error) {
     hideLoader();
