@@ -30,13 +30,15 @@ export function clearGallery() {
   galleryContainer.innerHTML = '';
 }
 
+
 export function showLoader() {
-  loader.classList.add('visible');
+  loader.classList.remove('hidden');
 }
 
 export function hideLoader() {
-  loader.classList.remove('visible');
+  loader.classList.add('hidden');
 }
+
 
 export function showLoadMoreButton() {
   loadMoreBtn.classList.remove('hidden');
