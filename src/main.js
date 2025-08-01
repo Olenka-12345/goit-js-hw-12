@@ -1,6 +1,4 @@
-import {
-  getImagesByQuery
-} from './js/pixabay-api.js';
+import { getImagesByQuery } from './js/pixabay-api.js';
 
 import {
   createGallery,
@@ -34,11 +32,11 @@ form.addEventListener('submit', async e => {
 
   clearGallery();
   hideLoadMoreButton();
-  showLoader();
+  // ❌ Лоадер не показуємо при першому запиті
 
   try {
     const data = await getImagesByQuery(query, page);
-    hideLoader();
+    hideLoader(); // на всяк випадок, якщо залишився
 
     if (data.totalHits === 0) {
       iziToast.error({ message: 'No images found' });
@@ -59,7 +57,7 @@ form.addEventListener('submit', async e => {
 
 loadMoreBtn.addEventListener('click', async () => {
   page++;
-  showLoader();
+  showLoader(); // ✅ Лоадер показуємо тільки тут
 
   try {
     const data = await getImagesByQuery(query, page);
