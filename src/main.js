@@ -49,7 +49,7 @@ function toggleLoading(page) {
   } else if (page === 2) {
     loadMoreBtn.style.display = 'block';
     loader.style.display = 'none';
-  } else if (page > 2) {
+  } else if (page >= 3) {
     loadMoreBtn.style.display = 'none';
     loader.style.display = 'block';
   } else {
