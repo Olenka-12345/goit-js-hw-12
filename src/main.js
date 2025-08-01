@@ -1,5 +1,5 @@
 
-import { fetchFromPixabay } from './pixabay-api.js';
+import { fetchFromPixabay } from './js/pixabay-api.js';
 let currentPage = 1;
 let currentQuery = '';
 
