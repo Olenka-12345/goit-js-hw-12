@@ -52,9 +52,6 @@ function toggleLoading(page) {
   } else if (page >= 3) {
     loadMoreBtn.style.display = 'none';
     loader.style.display = 'block';
-  } else {
-    loadMoreBtn.style.display = 'none';
-    loader.style.display = 'none';
   }
 }
 
