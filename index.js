@@ -8,5 +8,5 @@
         <p><b>Downloads:</b> ${t.downloads}</p>
       </div>
     </div>
-  `).join("");a.insertAdjacentHTML("beforeend",n)}function i(r){r===1?(s.style.display="none",l.style.display="none"):r===2?(s.style.display="block",l.style.display="none"):r>2?(s.style.display="none",l.style.display="block"):(s.style.display="none",l.style.display="none")}document.querySelector("form").addEventListener("submit",r=>{r.preventDefault(),a.innerHTML="",u=r.target.elements["search-text"].value.trim(),c=1,y(u,c)});s.addEventListener("click",()=>{y(u,c+1)});
+  `).join("");a.insertAdjacentHTML("beforeend",n)}function i(r){r===1?(s.style.display="none",l.style.display="none"):r===2?(s.style.display="block",l.style.display="none"):r>=3?(s.style.display="none",l.style.display="block"):(s.style.display="none",l.style.display="none")}document.querySelector("form").addEventListener("submit",r=>{r.preventDefault(),a.innerHTML="",u=r.target.elements["search-text"].value.trim(),c=1,y(u,c)});s.addEventListener("click",()=>{y(u,c+1)});
 //# sourceMappingURL=index.js.map
