@@ -31,10 +31,11 @@ form.addEventListener('submit', async e => {
 
   clearGallery();
   hideLoadMoreButton();
+  showLoader(); // ✅ Показуємо лоадер при першому запиті
 
   try {
     const data = await getImagesByQuery(query, page);
-    hideLoader(); // на випадок, якщо залишився
+    hideLoader();
 
     if (data.totalHits === 0) {
       iziToast.error({ message: 'No images found' });
@@ -55,7 +56,7 @@ form.addEventListener('submit', async e => {
 
 loadMoreBtn.addEventListener('click', async () => {
   page++;
-  showLoader(); // ✅ Показуємо лоадер тільки тут
+  showLoader();
 
   try {
     const data = await getImagesByQuery(query, page);
