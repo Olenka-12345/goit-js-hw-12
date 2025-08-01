@@ -36,16 +36,20 @@ function renderImages(images) {
 
 function toggleLoading(page) {
   if (page === 1) {
+    loadMoreBtn.style.display = 'none';
+    loader.style.display = 'none';
+  } else if (page === 2) {
     loadMoreBtn.style.display = 'block';
     loader.style.display = 'none';
-  } else if (page > 1) {
+  } else if (page > 2) {
     loadMoreBtn.style.display = 'none';
     loader.style.display = 'block';
   } else {
-    loadMoreBtn.style.display = 'block';
+    loadMoreBtn.style.display = 'none';
     loader.style.display = 'none';
   }
 }
+
 
 document.querySelector('form').addEventListener('submit', e => {
   e.preventDefault();
